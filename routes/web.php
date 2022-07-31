@@ -18,12 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/inverso', 'InversoController@inverso')->name('inverso');
 
-Route::get('/crear', 'UserController@crear')->name('crear');
-Route::get('/editar', 'UserController@editar')->name('editar');
-Route::get('/borrar', 'UserController@borrar')->name('borrar');
+Route::get('/crear', 'RutasController@crear')->name('crear');
+Route::get('/editar', 'RutasController@editar')->name('editar');
+Route::get('/borrar', 'RutasController@borrar')->name('borrar');
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::Exportar Excel:::::::::::::::::::::::::::::::::::*/
-Route::get('/excel', 'ExportacionController@excel')->name('exportar.excel');
+Route::get('/excel-export', 'ExportacionController@excel')->name('exportar.excel');
+
+/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*::::::::::::::::::::::::::::::::::Importar Excel:::::::::::::::::::::::::::::::::::*/
+Route::post('/excel-import', 'ImportacionController@excel')->name('importar.excel');

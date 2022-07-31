@@ -37,7 +37,7 @@
             <a href="index3.html" class="brand-link">
             <img src="{{ asset('img/logo.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                 style="opacity: .8">
-            <span class="brand-text font-weight-light">AdminLTE 3</span>
+            <span class="brand-text font-weight-light">Sistema de Rutas</span>
             </a>
 
             <!-- Sidebar -->
@@ -60,16 +60,10 @@
                 
                     <li class="nav-item">
                         <a href="/home" class="nav-link">
-                        <i class="fa-solid fa-user nav-icon"></i>
-                        <p>Usuarios</p>
+                        <i class="fa-solid fa-route nav-icon"></i>
+                        <p>Rutas</p>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/inverso" class="nav-link">
-                        <i class="fa-solid fa-user nav-icon"></i>
-                        <p>Inverso</p>
-                        </a>
-                    </li>
+                    </li>                   
                     
                     </ul>
                 </li>
@@ -94,31 +88,54 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#tabla').DataTable();
-        });
-        function reverse(s){
-            let mensaje = document.getElementById("mensaje").value;            
-            document.getElementById("estructura1").innerHTML = mensaje.split("").reverse().join("");
-        };
-        function reverse2(){
-            var nuevaCadena = "";
-            
-            let mensaje = document.getElementById("mensaje2").value;            
-            for (var i = mensaje.length - 1; i >= 0; i--) { 
-                nuevaCadena += mensaje[i]; 
-            }
-            document.getElementById("estructura2").innerHTML = nuevaCadena;
-        };
-        function consultarTabla(id,name,identificacion,email,direccion){
-            document.getElementById("id").value = id;
-            document.getElementById("name2").value = name;
-            document.getElementById("identificacion2").value = identificacion;
-            document.getElementById("email2").value = email;
-            document.getElementById("direccion2").value = direccion;
+        });        
+        
+        function consultarTabla(id_ruta,nombre,km,dias){            
+            document.getElementById("id").value = id_ruta;
+            document.getElementById("nombre").value = nombre;
+            document.getElementById("km").value = km;
+            document.getElementById("dias").value = dias;
         }
+
         function borrar(id){
             console.log(id);
-            document.getElementById("id3").value = id;
+            document.getElementById("borrar_ruta").value = id;
         }
+
+        $("#documento").change(function(){
+            $("button").prop("disabled", this.files.length == 0);
+            $("button").css("background", "rgba(0, 0, 0, 0) linear-gradient(169deg, rgb(0, 0, 0) 0%, rgb(0, 186, 255) 100%) repeat scroll 0% 0%");
+        });
+
+        $(document).on('change','input[type="file"]',function(){
+            // this.files[0].size recupera el tamaño del archivo
+            // alert(this.files[0].size);
+            
+            var fileName = this.files[0].name;
+            var fileSize = this.files[0].size;
+
+            if(fileSize > 3000000){
+                alert('El archivo no debe superar los 3MB');
+                this.value = '';
+                this.files[0].name = '';
+            }else{
+                // recuperamos la extensión del archivo
+                var ext = fileName.split('.').pop();
+                
+                // Convertimos en minúscula porque 
+                // la extensión del archivo puede estar en mayúscula
+                ext = ext.toLowerCase();
+
+                console.log(ext);
+                switch (ext) {                    
+                    case 'xlsx': break;
+                    default:
+                        alert('El archivo no tiene la extensión adecuada');
+                        this.value = ''; // reset del valor
+                        this.files[0].name = '';
+                }
+            }
+        });
     </script>
 </body>
 </html>

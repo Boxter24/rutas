@@ -25,9 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $usuarios = DB::table('users')
+        $rutas = DB::table('rutas')
         ->get();      
 
-        return view('home',compact('usuarios'));
+        return view('home',compact('rutas'));
     }
 }
