@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/crear', 'RutasController@crear')->name('crear');
 Route::get('/editar', 'RutasController@editar')->name('editar');
 Route::get('/borrar', 'RutasController@borrar')->name('borrar');
+Route::get('/cambiar-estado', 'RutasController@cambiarEstado')->name('cambiar.estado');
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::Exportar Excel:::::::::::::::::::::::::::::::::::*/

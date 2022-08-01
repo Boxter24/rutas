@@ -87,55 +87,80 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#tabla').DataTable();
+            $('#tabla').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Rutas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Rutas",
+                    "infoFiltered": "(Filtrado de _MAX_ total Rutas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Rutas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin Rutas encontradas",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            },);
         });        
-        
-        function consultarTabla(id_ruta,nombre,km,dias){            
+        //Rellenar Modal
+        function consultarTabla(id_ruta,nombre,km,dias,estado){               
             document.getElementById("id").value = id_ruta;
             document.getElementById("nombre").value = nombre;
             document.getElementById("km").value = km;
             document.getElementById("dias").value = dias;
-        }
 
+            //Agregando opciones al select
+            document.getElementById("estado1").value = estado;
+            document.getElementById("estado1").text = estado;
+            if(estado == "activo"){
+                document.getElementById("estado2").value = "inactivo";
+                document.getElementById("estado2").text = "inactivo";
+            }
+            else{
+                document.getElementById("estado2").value = "activo";
+                document.getElementById("estado2").text = "activo";
+            }
+        }
+        //Cambiar Estado Ruta
+        function cambiarEstado(id,estado){
+            console.log(id,estado);
+            document.getElementById("id_cambiar_estado_ruta").value = id;            
+            document.getElementById("cambiar_estado_ruta").value = estado;
+            $('#cambiarEstado').trigger('click');
+            
+        }
+        //Borrar Registro
         function borrar(id){
             console.log(id);
             document.getElementById("borrar_ruta").value = id;
         }
-
+        //Habilitar boton de importar una vez cargado un archivo EXCEL
         $("#documento").change(function(){
-            $("button").prop("disabled", this.files.length == 0);
-            $("button").css("background", "rgba(0, 0, 0, 0) linear-gradient(169deg, rgb(0, 0, 0) 0%, rgb(0, 186, 255) 100%) repeat scroll 0% 0%");
+            $("#importar").prop("disabled", this.files.length == 0);
+            $("#importar").css("background", "rgba(0, 0, 0, 0) linear-gradient(169deg, rgb(0, 0, 0) 0%, rgb(0, 186, 255) 100%) repeat scroll 0% 0%");
         });
+        //Restringir uso de nr y Caracteres Especiales en el nombre de una ruta
+        function check(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
 
-        $(document).on('change','input[type="file"]',function(){
-            // this.files[0].size recupera el tamaño del archivo
-            // alert(this.files[0].size);
-            
-            var fileName = this.files[0].name;
-            var fileSize = this.files[0].size;
-
-            if(fileSize > 3000000){
-                alert('El archivo no debe superar los 3MB');
-                this.value = '';
-                this.files[0].name = '';
-            }else{
-                // recuperamos la extensión del archivo
-                var ext = fileName.split('.').pop();
-                
-                // Convertimos en minúscula porque 
-                // la extensión del archivo puede estar en mayúscula
-                ext = ext.toLowerCase();
-
-                console.log(ext);
-                switch (ext) {                    
-                    case 'xlsx': break;
-                    default:
-                        alert('El archivo no tiene la extensión adecuada');
-                        this.value = ''; // reset del valor
-                        this.files[0].name = '';
-                }
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla == 8) {
+                return true;
             }
-        });
+
+            // Patrón de entrada, en este caso solo acepta numeros y letras
+            patron = /[A-Za-z--]/;
+            tecla_final = String.fromCharCode(tecla);
+            return patron.test(tecla_final);
+        }
     </script>
 </body>
 </html>
