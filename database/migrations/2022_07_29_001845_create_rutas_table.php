@@ -18,6 +18,7 @@ class CreateRutasTable extends Migration
             $table->string('nombre_ruta')->unique();
             $table->bigInteger('km_ruta');
             $table->bigInteger('dias_ruta');
+            $table->bigInteger('estado');
         });
     }
 

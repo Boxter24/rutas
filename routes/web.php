@@ -31,3 +31,8 @@ Route::get('/excel-export', 'ExportacionController@excel')->name('exportar.excel
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::Importar Excel:::::::::::::::::::::::::::::::::::*/
 Route::post('/excel-import', 'ImportacionController@excel')->name('importar.excel');
+
+
+/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*::::::::::::::::::::::::::::::::::Importar PDF:::::::::::::::::::::::::::::::::::*/
+Route::get('/rutas/imprimir', 'ExportacionController@pdf')->name('exportar.pdf');

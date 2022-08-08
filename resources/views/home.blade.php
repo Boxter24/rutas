@@ -20,8 +20,11 @@
                         Crear Ruta
                     </button>
                     <div class="" id="contenedor-busqueda">
-                    <div class="reportes-datatables">                        
-                        <a href="{{route('exportar.excel',['nombre' => 'rutas', 'campos' => ['id','nombre_ruta','km_ruta','dias_ruta']])}}"><i style="color: black;width: 40px;" class="icono-herramientas fa-solid fa-file-excel"></i></a>
+                    <div class="reportes-datatables">       
+                        <div class="export">
+                            <a href="{{route('exportar.excel',['nombre' => 'rutas', 'campos' => ['id','nombre_ruta','km_ruta','dias_ruta']])}}"><i style="color: black;width: 40px;" class="icono-herramientas fa-solid fa-file-excel"></i></a>
+                            <a href="{{route('exportar.pdf')}}"><i style="color: black;width: 40px;" class="icono-herramientas fa-solid fa-file-pdf"></i></a>
+                        </div>                                         
                         <div class="import">                            
                             <form action="{{route('importar.excel')}}" method="post" enctype="multipart/form-data">                                
                                 @csrf
