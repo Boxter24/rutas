@@ -62,7 +62,7 @@
                     with font-awesome or any other icon font library -->
                 
                     <li class="nav-item">
-                        <a href="/home" class="nav-link">
+                        <a href="{{route('home')}}" class="nav-link">
                         <i class="fa-solid fa-route nav-icon"></i>
                         <p>Rutas</p>
                         </a>
@@ -77,8 +77,29 @@
 
                     <li class="nav-item">
                         <a href="{{route('paises')}}" class="nav-link">
-                        <i class="fa-solid fa-earth-americas nav-icon"></i>
-                        <p>Paises</p>
+                            <i class="fa-solid fa-earth-americas nav-icon"></i>
+                            <p>Paises</p>
+                        </a>
+                    </li> 
+
+                    <li class="nav-item">
+                        <a href="{{route('vehiculos')}}" class="nav-link">
+                            <i class="fa-solid fa-car nav-icon"></i>
+                            <p>Vehículos</p>
+                        </a>
+                    </li> 
+
+                    <li class="nav-item">
+                        <a href="{{route('cargas')}}" class="nav-link">
+                            <i class="fa-solid fa-box nav-icon"></i>
+                            <p>Cargas</p>
+                        </a>
+                    </li> 
+
+                    <li class="nav-item">
+                        <a href="{{route('tipo_accesorio')}}" class="nav-link">
+                            <i class="fa-solid fa-gear nav-icon"></i>
+                            <p>Tipo Accesorio</p>
                         </a>
                     </li> 
                     
@@ -104,9 +125,10 @@
 
     <script type="text/javascript">
         let URLactual = window.location.href;
-        
+        let nombre = window.location.pathname.slice(1, -1).replace(/-/g, ' ');
+        let variable = window.location.pathname.slice(1, -1).replace(/-/g, '_');
         //Rutas
-        if(URLactual == "{{route('home')}}"){
+        if(URLactual == "{{route('home')}}"){            
             $(document).ready(function () {
                 $('#tabla').DataTable({
                     language: {
@@ -152,7 +174,6 @@
             }
             //Cambiar Estado Ruta
             function cambiarEstado(id,estado){
-                console.log(id,estado);
                 document.getElementById("id_cambiar_estado_ruta").value = id;            
                 document.getElementById("cambiar_estado_ruta").value = estado;
                 $('#cambiarEstado').trigger('click');
@@ -160,7 +181,6 @@
             }
             //Borrar Registro
             function borrar(id){
-                console.log(id);
                 document.getElementById("borrar_ruta").value = id;
             }
         }
@@ -217,7 +237,6 @@
             }
             //Borrar Registro
             function borrar(id){
-                console.log(id);
                 document.getElementById("borrar_unidad_de_negocios").value = id;
             }
         }
@@ -267,17 +286,129 @@
                 }
             }
             //Cambiar Estado 
-            function cambiarEstado(id,estado){
-                console.log(id,estado);
+            function cambiarEstado(id,estado){                
                 document.getElementById("id_cambiar_estado_pais").value = id;            
                 document.getElementById("cambiar_estado_pais").value = estado;
                 $('#cambiarEstado').trigger('click');
                 
             }
             //Borrar Registro
-            function borrar(id){
-                console.log(id);
+            function borrar(id){                
                 document.getElementById("borrar_pais").value = id;
+            }
+        }
+
+        //Vehículos       
+        else if(URLactual == "{{route('vehiculos')}}"){
+            $(document).ready(function () {
+                $('#tabla').DataTable({
+                    language: {
+                        "decimal": "",
+                        "emptyTable": "No hay información",
+                        "info": "Mostrando _START_ a _END_ de _TOTAL_ Vehículos",
+                        "infoEmpty": "Mostrando 0 to 0 de 0 Vehículos",
+                        "infoFiltered": "(Filtrado de _MAX_ total Vehículos)",
+                        "infoPostFix": "",
+                        "thousands": ",",
+                        "lengthMenu": "Mostrar _MENU_ Vehículos",
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "search": "Buscar:",
+                        "zeroRecords": "Sin Vehículos encontrados",
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        }
+                    }
+                },);
+            });   
+            //Rellenar Modal
+            function consultarTabla(id,nombre,ideales,estado){        
+                       
+                document.getElementById("id").value = id;        
+                document.getElementById("nombre").value = nombre;
+                document.getElementById("ideales").value = ideales;
+
+                //Agregando opciones al select
+                document.getElementById("estado1").value = estado;
+                document.getElementById("estado1").text = estado;
+                if(estado == "activo"){
+                    document.getElementById("estado2").value = "inactivo";
+                    document.getElementById("estado2").text = "inactivo";
+                }
+                else{
+                    document.getElementById("estado2").value = "activo";
+                    document.getElementById("estado2").text = "activo";
+                }
+            }
+            //Cambiar Estado 
+            function cambiarEstado(id,estado){                
+                document.getElementById("id_cambiar_estado_vehiculo").value = id;            
+                document.getElementById("cambiar_estado_vehiculo").value = estado;
+                $('#cambiarEstado').trigger('click');
+                
+            }
+            //Borrar Registro
+            function borrar(id){                
+                document.getElementById("borrar_vehiculo").value = id;
+            }
+        }
+
+        //Carga       
+        else{
+            $(document).ready(function () {
+                $('#tabla').DataTable({
+                    language: {
+                        "decimal": "",
+                        "emptyTable": "No hay información",
+                        "info": "Mostrando _START_ a _END_ de _TOTAL_ "+nombre,
+                        "infoEmpty": "Mostrando 0 de 0 de 0 "+nombre,
+                        "infoFiltered": "(Filtrado de _MAX_ total "+nombre+")",
+                        "infoPostFix": "",
+                        "thousands": ",",
+                        "lengthMenu": "Mostrar _MENU_ "+nombre,
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "search": "Buscar:",
+                        "zeroRecords": "Sin "+nombre,
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        }
+                    }
+                },);
+            });   
+            //Rellenar Modal
+            function consultarTabla(id,nombre,estado){               
+                document.getElementById("id").value = id;        
+                document.getElementById("nombre_data").value = nombre;                
+                
+                //Agregando opciones al select
+                document.getElementById("estado1").value = estado;
+                document.getElementById("estado1").text = estado;
+                if(estado == "activo"){
+                    document.getElementById("estado2").value = "inactivo";
+                    document.getElementById("estado2").text = "inactivo";
+                }
+                else{
+                    document.getElementById("estado2").value = "activo";
+                    document.getElementById("estado2").text = "activo";
+                }
+            }
+            //Cambiar Estado 
+            function cambiarEstado(id,estado){                
+                document.getElementById("id_cambiar_estado_"+variable).value = id;            
+                document.getElementById("cambiar_estado_"+variable).value = estado;
+                $('#cambiarEstado').trigger('click');
+                
+            }
+            //Borrar Registro
+            function borrar(id){                
+                document.getElementById("borrar_"+variable).value = id;
             }
         }
 

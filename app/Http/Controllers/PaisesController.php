@@ -61,7 +61,7 @@ class PaisesController extends Controller
         $rutas = DB::table('paises')
         ->where('id','=',$request->id)
         ->update([
-            "estado" => $estado,
+            "estado_pais" => $estado,
         ]);   
         
         return redirect()->to('/paises');

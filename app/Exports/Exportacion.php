@@ -158,7 +158,7 @@ class Exportacion implements
     //Vista
     public function view(): View
     {
-        return view('exports.exportacion', [
+        return view('exports.excel', [
             'datos' => $this->datos,
             'header' => $this->header,
             'nombre' => $this->nombre,

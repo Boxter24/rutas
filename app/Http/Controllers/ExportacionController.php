@@ -10,8 +10,7 @@ use \PDF;
 
 class ExportacionController extends Controller
 {
-    public function excel(Request $request){   
-        //dd($request);
+    public function excel(Request $request){           
         return Excel::download(new Exportacion($request->nombre,$request->campos), $request->nombre.'.xlsx');
     }
 
@@ -38,7 +37,7 @@ class ExportacionController extends Controller
         $modulo = $request->nombre;
         $campos = $request->campos;
         
-        $pdf = PDF::loadView('pdfs.plantilla', compact('consulta', 'fecha', "modulo", 'campos'));
+        $pdf = PDF::loadView('exports.pdf', compact('consulta', 'fecha', "modulo", 'campos'));
         return $pdf->download($modulo . '.pdf');
     }
 }

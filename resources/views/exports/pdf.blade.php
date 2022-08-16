@@ -86,7 +86,7 @@
                         <tr class="t-header">
                             <th style="width: 5%;">Nº</th>  
                             @for ($i = 0; $i < count($campos); $i++)                                    
-                                <th style="width: 10%;">{{str_replace("_", " ", strtoupper($campos[$i]))}}</th>
+                                <th style="width: (100/count($campos))%;">{{str_replace("_", " ", strtoupper($campos[$i]))}}</th>
                             @endfor                                                       
                         </tr>
                     </thead>
