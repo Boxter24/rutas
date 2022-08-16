@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRutasTable extends Migration
+class CreateUnidadesDeNegociosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateRutasTable extends Migration
      */
     public function up()
     {
-        Schema::create('rutas', function (Blueprint $table) {
+        Schema::create('unidades_de_negocios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre_ruta')->unique();
-            $table->bigInteger('km_ruta');
-            $table->bigInteger('dias_ruta');
+            $table->string('nombre_unidad_de_negocios')->unique();
             $table->string('estado')->default('activo');
         });
     }
@@ -29,6 +27,6 @@ class CreateRutasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rutas');
+        Schema::dropIfExists('unidades_de_negocios');
     }
 }

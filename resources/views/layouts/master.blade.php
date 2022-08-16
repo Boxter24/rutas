@@ -20,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini" >
     <div id="app">
@@ -65,7 +66,21 @@
                         <i class="fa-solid fa-route nav-icon"></i>
                         <p>Rutas</p>
                         </a>
-                    </li>                   
+                    </li> 
+                    
+                    <li class="nav-item">
+                        <a href="{{route('unidades_de_negocios')}}" class="nav-link">
+                        <i class="fa-solid fa-briefcase nav-icon"></i>
+                        <p>Unidades de Negocios</p>
+                        </a>
+                    </li> 
+
+                    <li class="nav-item">
+                        <a href="{{route('paises')}}" class="nav-link">
+                        <i class="fa-solid fa-earth-americas nav-icon"></i>
+                        <p>Paises</p>
+                        </a>
+                    </li> 
                     
                     </ul>
                 </li>
@@ -88,67 +103,191 @@
     <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#tabla').DataTable({
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Rutas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Rutas",
-                    "infoFiltered": "(Filtrado de _MAX_ total Rutas)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ Rutas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin Rutas encontradas",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
+        let URLactual = window.location.href;
+        
+        //Rutas
+        if(URLactual == "{{route('home')}}"){
+            $(document).ready(function () {
+                $('#tabla').DataTable({
+                    language: {
+                        "decimal": "",
+                        "emptyTable": "No hay información",
+                        "info": "Mostrando _START_ a _END_ de _TOTAL_ Rutas",
+                        "infoEmpty": "Mostrando 0 de 0 of 0 Rutas",
+                        "infoFiltered": "(Filtrado de _MAX_ total Rutas)",
+                        "infoPostFix": "",
+                        "thousands": ",",
+                        "lengthMenu": "Mostrar _MENU_ Rutas",
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "search": "Buscar:",
+                        "zeroRecords": "Sin Rutas encontradas",
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        }
                     }
-                }
-            },);
-        });        
-        //Rellenar Modal
-        function consultarTabla(id_ruta,nombre,km,dias,estado){               
-            document.getElementById("id").value = id_ruta;
-            document.getElementById("nombre").value = nombre;
-            document.getElementById("km").value = km;
-            document.getElementById("dias").value = dias;
+                },);
+            });        
+            //Rellenar Modal
+            function consultarTabla(id_ruta,nombre,km,dias,estado){               
+                document.getElementById("id").value = id_ruta;
+                document.getElementById("nombre").value = nombre;
+                document.getElementById("km").value = km;
+                document.getElementById("dias").value = dias;
 
-            //Agregando opciones al select
-            document.getElementById("estado1").value = estado;
-            document.getElementById("estado1").text = estado;
-            if(estado == "activo"){
-                document.getElementById("estado2").value = "inactivo";
-                document.getElementById("estado2").text = "inactivo";
+                //Agregando opciones al select
+                document.getElementById("estado1").value = estado;
+                document.getElementById("estado1").text = estado;
+                if(estado == "activo"){
+                    document.getElementById("estado2").value = "inactivo";
+                    document.getElementById("estado2").text = "inactivo";
+                }
+                else{
+                    document.getElementById("estado2").value = "activo";
+                    document.getElementById("estado2").text = "activo";
+                }
             }
-            else{
-                document.getElementById("estado2").value = "activo";
-                document.getElementById("estado2").text = "activo";
+            //Cambiar Estado Ruta
+            function cambiarEstado(id,estado){
+                console.log(id,estado);
+                document.getElementById("id_cambiar_estado_ruta").value = id;            
+                document.getElementById("cambiar_estado_ruta").value = estado;
+                $('#cambiarEstado').trigger('click');
+                
+            }
+            //Borrar Registro
+            function borrar(id){
+                console.log(id);
+                document.getElementById("borrar_ruta").value = id;
             }
         }
-        //Cambiar Estado Ruta
-        function cambiarEstado(id,estado){
-            console.log(id,estado);
-            document.getElementById("id_cambiar_estado_ruta").value = id;            
-            document.getElementById("cambiar_estado_ruta").value = estado;
-            $('#cambiarEstado').trigger('click');
-            
+
+        //Unidades de Negocios        
+        else if(URLactual == "{{route('unidades_de_negocios')}}"){            
+            $(document).ready(function () {
+                $('#tabla').DataTable({
+                    language: {
+                        "decimal": "",
+                        "emptyTable": "No hay información",
+                        "info": "Mostrando _START_ a _END_ de _TOTAL_ Unidades de Negocios",
+                        "infoEmpty": "Mostrando 0 to 0 de 0 Unidades de Negocios",
+                        "infoFiltered": "(Filtrado de _MAX_ total Unidades de Negocios)",
+                        "infoPostFix": "",
+                        "thousands": ",",
+                        "lengthMenu": "Mostrar _MENU_ Unidades de Negocios",
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "search": "Buscar:",
+                        "zeroRecords": "Sin Unidades de Negocios encontradas",
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        }
+                    }
+                },);
+            });   
+            //Rellenar Modal
+            function consultarTabla(id,nombre,estado){                    
+                document.getElementById("id").value = id;        
+                document.getElementById("nombre").value = nombre;
+
+                //Agregando opciones al select
+                document.getElementById("estado1").value = estado;
+                document.getElementById("estado1").text = estado;
+                if(estado == "activo"){
+                    document.getElementById("estado2").value = "inactivo";
+                    document.getElementById("estado2").text = "inactivo";
+                }
+                else{
+                    document.getElementById("estado2").value = "activo";
+                    document.getElementById("estado2").text = "activo";
+                }
+            }
+            //Cambiar Estado 
+            function cambiarEstado(id,estado){                
+                document.getElementById("id_cambiar_estado_unidad_de_negocios").value = id;            
+                document.getElementById("cambiar_estado_unidad_de_negocios").value = estado;
+                $('#cambiarEstado').trigger('click');
+                
+            }
+            //Borrar Registro
+            function borrar(id){
+                console.log(id);
+                document.getElementById("borrar_unidad_de_negocios").value = id;
+            }
         }
-        //Borrar Registro
-        function borrar(id){
-            console.log(id);
-            document.getElementById("borrar_ruta").value = id;
+        
+        //Paises       
+        else if(URLactual == "{{route('paises')}}"){
+            $(document).ready(function () {
+                $('#tabla').DataTable({
+                    language: {
+                        "decimal": "",
+                        "emptyTable": "No hay información",
+                        "info": "Mostrando _START_ a _END_ de _TOTAL_ Paises",
+                        "infoEmpty": "Mostrando 0 to 0 de 0 Paises",
+                        "infoFiltered": "(Filtrado de _MAX_ total Paises)",
+                        "infoPostFix": "",
+                        "thousands": ",",
+                        "lengthMenu": "Mostrar _MENU_ Paises",
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "search": "Buscar:",
+                        "zeroRecords": "Sin Paises encontrados",
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        }
+                    }
+                },);
+            });   
+            //Rellenar Modal
+            function consultarTabla(id,nombre,codigo_telefonico,estado){               
+                document.getElementById("id").value = id;        
+                document.getElementById("nombre").value = nombre;
+                document.getElementById("codigo").value = codigo_telefonico;
+
+                //Agregando opciones al select
+                document.getElementById("estado1").value = estado;
+                document.getElementById("estado1").text = estado;
+                if(estado == "activo"){
+                    document.getElementById("estado2").value = "inactivo";
+                    document.getElementById("estado2").text = "inactivo";
+                }
+                else{
+                    document.getElementById("estado2").value = "activo";
+                    document.getElementById("estado2").text = "activo";
+                }
+            }
+            //Cambiar Estado 
+            function cambiarEstado(id,estado){
+                console.log(id,estado);
+                document.getElementById("id_cambiar_estado_pais").value = id;            
+                document.getElementById("cambiar_estado_pais").value = estado;
+                $('#cambiarEstado').trigger('click');
+                
+            }
+            //Borrar Registro
+            function borrar(id){
+                console.log(id);
+                document.getElementById("borrar_pais").value = id;
+            }
         }
+
+        //General
         //Habilitar boton de importar una vez cargado un archivo EXCEL
         $("#documento").change(function(){
             $("#importar").prop("disabled", this.files.length == 0);
             $("#importar").css("background", "rgba(0, 0, 0, 0) linear-gradient(169deg, rgb(0, 0, 0) 0%, rgb(0, 186, 255) 100%) repeat scroll 0% 0%");
         });
+        
         //Restringir uso de nr y Caracteres Especiales en el nombre de una ruta
         function check(e) {
             tecla = (document.all) ? e.keyCode : e.which;

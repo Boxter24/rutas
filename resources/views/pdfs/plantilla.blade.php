@@ -72,7 +72,7 @@
                 </p>
             </div>
             <div style="text-align: center;margin:0;padding:25px 0;font-family: Arial;">
-                <h3 style="margin:0;padding:0">Rutas </h3>
+                <h3 style="margin:0;padding:0">{{strtoupper($modulo)}}</h3>
                 <h4 style="margin:0;padding:10px 0">Listado de {{ $modulo }}</h4>
             </div>
         </div>
@@ -85,20 +85,21 @@
                     <thead>
                         <tr class="t-header">
                             <th style="width: 5%;">Nº</th>  
-                            <th style="width: 10%;">Nombre Ruta</th>
-                            <th style="width: 10%;">Km</th>
-                            <th style="width: 10%;">Días</th>
-                            <th style="width: 10%;">Estado</th>                            
+                            @for ($i = 0; $i < count($campos); $i++)                                    
+                                <th style="width: 10%;">{{str_replace("_", " ", strtoupper($campos[$i]))}}</th>
+                            @endfor                                                       
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($rutas as $ruta)
-                            <tr>
+                        @foreach ($consulta as $data)                                                    
+                            <tr>                                
                                 <td style="width: 5%;">{{ $loop->iteration }}</td>
-                                <td>{{ strtoupper($ruta->nombre_ruta) }}</td>
-                                <td>{{ strtoupper($ruta->km_ruta) }}</td> 
-                                <td>{{ strtoupper($ruta->dias_ruta) }}</td>
-                                <td>{{ strtoupper($ruta->estado_ruta) }}</td>                                
+                                @for ($i = 0; $i < count($campos); $i++)     
+                                    @php
+                                        $campo = $campos[$i];
+                                    @endphp                                   
+                                    <td>{{ strtoupper($data->$campo) }}</td>                                       
+                                @endfor                                
                             </tr>
                         @endforeach
                     </tbody>
@@ -115,7 +116,7 @@
         </script>
     </main>
     <footer>
-        <p style="padding-top: 1px;margin:0; font-size: 14px; font-weight: bold">Sistema de Rutas</p>
+        <p style="padding-top: 1px;margin:0; font-size: 14px; font-weight: bold">Sistema de {{$modulo}}</p>
         <p style="padding-top: 1px;margin:0"> © 2022 Todos los derechos reservados.</p>
 
     </footer>

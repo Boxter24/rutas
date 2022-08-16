@@ -1,0 +1,82 @@
+.modal-footer{
+    justify-content: space-between!important;
+}
+.msjExito,.msjNota,.msjError{
+    cursor: pointer;
+    width: 100%;
+    text-align: center;        
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.msjExito{
+    background: linear-gradient(169deg, rgba(2,80,13,1) 0%, rgba(4,204,0,1) 100%);
+}
+.msjNota{
+    background: linear-gradient(169deg, rgba(2,26,59,1) 0%, rgba(5,86,214,1) 100%);
+}
+.msjError{
+    background: linear-gradient(164deg, rgba(0,0,0,1) 0%, rgba(230,2,10,0.9808123078332895) 100%); 
+}
+.reportes-datatables{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.import{
+    position: relative; 
+    display: grid; 
+    justify-content: center;
+    width: 328px;
+}
+#documento{
+    opacity: 0; 
+    z-index: 9999; 
+    position: sticky;
+    cursor: pointer;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.subir-archivo{
+    position: absolute;
+    width: 100%;
+    height: 22px;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(169deg, rgba(0,0,0,1) 0%, rgba(4,204,0,1) 100%);
+    color: white;
+}
+#importar{
+    width: 70px; 
+    height: 30px; 
+    border-radius: 8px; 
+    color: white; 
+    font-weight: bold; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.opciones{
+    display: flex;
+    justify-content: center;
+}
+.separador{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.fa-eye{
+    color: green;
+}
+.fa-eye-slash{
+    color: #44403a;
+}
