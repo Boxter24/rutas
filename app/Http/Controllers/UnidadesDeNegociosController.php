@@ -22,7 +22,7 @@ class UnidadesDeNegociosController extends Controller
             return redirect()->to('/unidades-de-negocios')->with('msj', "Error".$existe->nombre_unidad_de_negocios);
         }
         else{
-            $ruta = UnidadesDeNegocios::create($request->post());
+            $unidad_de_negocios = UnidadesDeNegocios::create($request->post());
             return redirect()->to('/unidades-de-negocios')->with('msj', "Exito");
         }        
     }
@@ -46,7 +46,7 @@ class UnidadesDeNegociosController extends Controller
             $estado = "activo";
         }
         //dd($estado);
-        $rutas = DB::table('unidades_de_negocios')
+        $unidad_de_negocios = DB::table('unidades_de_negocios')
         ->where('id','=',$request->id)
         ->update([
             "estado" => $estado,
