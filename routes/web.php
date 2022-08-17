@@ -43,6 +43,22 @@ Route::get('/borrar-pais', 'PaisesController@borrar')->name('borrar_pais');
 Route::get('/cambiar-estado-pais', 'PaisesController@cambiarEstado')->name('cambiar_estado_pais');
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*::::::::::::::::::::::::::::::::::A TIEMPO:::::::::::::::::::::::::::::::::::*/
+Route::get('/a-tiemmpo', 'A_TiempoController@index')->name('a_tiempo');
+Route::get('/crear-a-tiemmpo', 'A_TiempoController@crear')->name('crear_a_tiempo');
+Route::get('/editar-a-tiemmpo', 'A_TiempoController@editar')->name('editar_a_tiempo');
+Route::get('/borrar-a-tiemmpo', 'A_TiempoController@borrar')->name('borrar_a_tiempo');
+Route::get('/cambiar-estado-a-tiemmpo', 'A_TiempoController@cambiarEstado')->name('cambiar_estado_a_tiempo');
+
+/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*::::::::::::::::::::::::::::::::::COMPLETADAS:::::::::::::::::::::::::::::::::::*/
+Route::get('/completadas', 'CompletadasController@index')->name('completadas');
+Route::get('/crear-completadas', 'CompletadasController@crear')->name('crear_completadas');
+Route::get('/editar-completadas', 'CompletadasController@editar')->name('editar_acompletadas');
+Route::get('/borrar-completadas', 'CompletadasController@borrar')->name('borrar_completadas');
+Route::get('/cambiar-estado-completadaso', 'CompletadasController@cambiarEstado')->name('cambiar_estado_completadas');
+
+/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::Exportar Excel:::::::::::::::::::::::::::::::::::*/
 Route::get('/excel-export', 'ExportacionController@excel')->name('exportar.excel');
 
